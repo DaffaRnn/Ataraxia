@@ -1,28 +1,29 @@
-# Gunakan image PHP dengan Apache
 FROM php:8.2-apache
 
-# Install dependensi sistem agar bisa meng-compile ekstensi PHP
+# Install dependencies sistem lebih ringan dalam dua langkah
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    zip \
     unzip \
-    && docker-php-ext-install mysqli pdo pdo_mysql
+    zip \
+    zlib1g-dev
 
-# Aktifkan mod_rewrite (jika pakai routing/htaccess)
+# Install ekstensi PHP
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Aktifkan mod_rewrite Apache
 RUN a2enmod rewrite
 
-# Salin semua file project ke dalam container
+# Salin semua file project
 COPY . /var/www/html/
 
-# Salin file .env dari secret (jika pakai Railway Secret atau Render Secret)
-# DI RAILWAY: kamu bisa inject .env ke dalam Environment Variable, jadi bagian ini opsional
+# Jika menggunakan secret file .env dari Railway atau Render (opsional)
 COPY /etc/secrets/.env /var/www/html/.env
 
-# Ubah hak akses file agar sesuai dengan user Apache
+# Ubah hak akses
 RUN chown -R www-data:www-data /var/www/html
 
-# Buka port 80
+# Port yang digunakan
 EXPOSE 80
