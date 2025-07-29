@@ -22,6 +22,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www/html
 
+# Set Apache DocumentRoot ke folder public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
 # Copy file project (semua file) ke container
 COPY . .
 
