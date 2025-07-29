@@ -1,7 +1,7 @@
 # Gunakan image PHP + Apache
 FROM php:8.2-apache
 
-# Install dependencies sistem (terpisah agar ringan)
+# Install dependencies sistem
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpng-dev \
@@ -17,14 +17,11 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 # Aktifkan mod_rewrite (htaccess)
 RUN a2enmod rewrite
 
-# Copy isi folder public ke folder default Apache
+# Copy semua file dari public ke /var/www/html
 COPY public/ /var/www/html/
 
-# Copy vendor kalau pakai composer
-COPY vendor/ /var/www/html/vendor/
-
-# Ubah permission
+# (Opsional) ubah permission
 RUN chown -R www-data:www-data /var/www/html
 
-# Port 80
+# Port
 EXPOSE 80
