@@ -17,8 +17,11 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 # Aktifkan mod_rewrite (htaccess)
 RUN a2enmod rewrite
 
-# Copy project
-COPY . /var/www/html/
+# Copy isi folder public ke folder default Apache
+COPY public/ /var/www/html/
+
+# Copy vendor kalau pakai composer
+COPY vendor/ /var/www/html/vendor/
 
 # Ubah permission
 RUN chown -R www-data:www-data /var/www/html
