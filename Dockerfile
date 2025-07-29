@@ -1,6 +1,7 @@
+# Gunakan image PHP + Apache
 FROM php:8.2-apache
 
-# Install dependencies sistem lebih ringan dalam dua langkah
+# Install dependencies sistem (terpisah agar ringan)
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpng-dev \
@@ -13,17 +14,14 @@ RUN apt-get update && apt-get install -y \
 # Install ekstensi PHP
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Aktifkan mod_rewrite Apache
+# Aktifkan mod_rewrite (htaccess)
 RUN a2enmod rewrite
 
-# Salin semua file project
+# Copy project
 COPY . /var/www/html/
 
-# Jika menggunakan secret file .env dari Railway atau Render (opsional)
-COPY /etc/secrets/.env /var/www/html/.env
-
-# Ubah hak akses
+# Ubah permission
 RUN chown -R www-data:www-data /var/www/html
 
-# Port yang digunakan
+# Port 80
 EXPOSE 80
