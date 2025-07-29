@@ -9,19 +9,32 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     unzip \
     zip \
-    zlib1g-dev
+    zlib1g-dev \
+    git \
+    curl
 
 # Install ekstensi PHP
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Aktifkan mod_rewrite (htaccess)
+# Install Composer dari image resmi Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy file project (semua file) ke container
+COPY . .
+
+# Jalankan Composer install
+RUN composer install --no-dev --optimize-autoloader
+
+# Aktifkan mod_rewrite Apache (untuk .htaccess)
 RUN a2enmod rewrite
 
-# Copy semua file dari public ke /var/www/html
-COPY public/ /var/www/html/
-
-# (Opsional) ubah permission
+# Ubah permission (opsional tapi aman untuk produksi)
 RUN chown -R www-data:www-data /var/www/html
 
-# Port
+# Buka port 80
 EXPOSE 80
+
+# Jalankan Apache (otomatis dijalankan oleh base image)

@@ -1,0 +1,14 @@
+/vendor
+/node_modules
+*.log
+*.env
+.env.*
+*.sqlite
+.idea
+.DS_Store
+*.sql
+*.zip
+*.tar.gz
+*.gz
+storage/logs/*
+storage/framework/*
