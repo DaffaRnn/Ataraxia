@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../vendor/autoload.php'; // Pastikan autoload tetap digunakan
 
 // Ambil DATABASE_URL dari environment
-$DATABASE_URL = getenv("DATABASE_URL");
+$DATABASE_URL = getenv("DATABASE_URL") ?: getenv("MYSQL_URL");
 
 if (!$DATABASE_URL) {
     die("DATABASE_URL tidak ditemukan!");
