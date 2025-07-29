@@ -1,17 +1,21 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php'; // Autoload composer (pastikan path-nya benar)
+require_once __DIR__ . '/../vendor/autoload.php'; // Pastikan autoload tetap digunakan
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../'); // Sesuaikan path ke root
-$dotenv->load();
+// Ambil DATABASE_URL dari environment
+$DATABASE_URL = getenv("DATABASE_URL");
 
-// Parse DATABASE_URL
-$dbUrl = parse_url($_ENV['DATABASE_URL']);
+if (!$DATABASE_URL) {
+    die("DATABASE_URL tidak ditemukan!");
+}
+
+// Parse URL
+$dbUrl = parse_url($DATABASE_URL);
 
 $host = $dbUrl['host'];
 $user = $dbUrl['user'];
 $pass = $dbUrl['pass'];
 $db   = ltrim($dbUrl['path'], '/');
-$port = $dbUrl['port'] ?? 3306; // default ke 3306 jika tidak ada
+$port = $dbUrl['port'] ?? 3306; // default ke 3306 jika tidak disediakan
 
 // Buat koneksi
 $conn = new mysqli($host, $user, $pass, $db, $port);
