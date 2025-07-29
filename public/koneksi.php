@@ -1,14 +1,24 @@
 <?php
-$host = getenv("DB_HOST");
-$user = getenv("DB_USER");
-$pass = getenv("DB_PASS");
-$db   = getenv("DB_NAME");
+$DATABASE_URL = getenv("DATABASE_URL");
 
-$conn = new mysqli($host, $user, $pass, $db);
+if ($DATABASE_URL) {
+    $url = parse_url($DATABASE_URL);
+    
+    $host = $url["host"];
+    $user = $url["user"];
+    $pass = $url["pass"];
+    $db   = ltrim($url["path"], "/");
+    $port = $url["port"];
 
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+    $conn = new mysqli($host, $user, $pass, $db, $port);
+
+    if ($conn->connect_error) {
+        die("Koneksi gagal: " . $conn->connect_error);
+    }
+} else {
+    die("DATABASE_URL tidak ditemukan!");
 }
+
 // var_dump($conn);
 
 function query($query){
