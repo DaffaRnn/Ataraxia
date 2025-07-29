@@ -1,24 +1,25 @@
 <?php
-$DATABASE_URL = getenv("DATABASE_URL");
+require_once __DIR__ . '/../vendor/autoload.php'; // Autoload composer (pastikan path-nya benar)
 
-if ($DATABASE_URL) {
-    $url = parse_url($DATABASE_URL);
-    
-    $host = $url["host"];
-    $user = $url["user"];
-    $pass = $url["pass"];
-    $db   = ltrim($url["path"], "/");
-    $port = $url["port"];
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../'); // Sesuaikan path ke root
+$dotenv->load();
 
-    $conn = new mysqli($host, $user, $pass, $db, $port);
+// Parse DATABASE_URL
+$dbUrl = parse_url($_ENV['DATABASE_URL']);
 
-    if ($conn->connect_error) {
-        die("Koneksi gagal: " . $conn->connect_error);
-    }
-} else {
-    die("DATABASE_URL tidak ditemukan!");
+$host = $dbUrl['host'];
+$user = $dbUrl['user'];
+$pass = $dbUrl['pass'];
+$db   = ltrim($dbUrl['path'], '/');
+$port = $dbUrl['port'] ?? 3306; // default ke 3306 jika tidak ada
+
+// Buat koneksi
+$conn = new mysqli($host, $user, $pass, $db, $port);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
 }
-
 // var_dump($conn);
 
 function query($query){
