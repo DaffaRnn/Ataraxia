@@ -1,4 +1,8 @@
-<?php require('koneksi.php')?>
+<?php require('koneksi.php');
+
+require __DIR__.'/../vendor/autoload.php';
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">

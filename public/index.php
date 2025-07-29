@@ -1,5 +1,6 @@
 <?php
 require "koneksi.php";
+require __DIR__.'/../vendor/autoload.php';
 
 $data = query("SELECT * FROM product");
 // var_dump($db);
