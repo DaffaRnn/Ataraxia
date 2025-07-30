@@ -97,7 +97,7 @@ if (isset($_GET['code'])) {
         echo "
             <script>
                 alert('Login Berhasil!');
-                document.location.href = 'admin.php';
+                document.location.href = '/public/admin.php';
             </script>
         ";
         // header('location: admin.php');
@@ -105,7 +105,7 @@ if (isset($_GET['code'])) {
         echo "
             <script>
                 alert('Login Gagal!');
-                document.location.href = 'index.php';
+                document.location.href = '/public/index.php';
             </script>
         ";
     }
