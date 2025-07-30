@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['logged_in'])) {
-    header('location: public/index.php');
+    header('location: /index.php');
 }
 
 ?>
