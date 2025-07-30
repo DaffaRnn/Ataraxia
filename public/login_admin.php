@@ -32,9 +32,6 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
 //tampung client secret, client id, dan redirect uri
 $client_id          = getenv('GOOGLE_CLIENT_ID');
 $client_secret      = getenv('GOOGLE_CLIENT_SECRET');
