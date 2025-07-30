@@ -142,37 +142,12 @@ if (isset($_GET['code'])) {
         <title>Ataraxia</title>
     </head>
     <body>
-        <!-- ===================== SCROLL TOP ==================== -->
-        <!-- <a href="#" class="scrolltop" id="scroll-top">
-            <i class='bx bx-chevron-up scrolltop__icon'></i>
-        </a> -->
 
         <!-- ===================== HEADER ==================== -->
         <header class="l-header" id="header">
             <nav class="nav bd-container">
 
-                <!-- <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-menu'></i>
-                </div> -->
-                
-
                 <a href="#" class="nav__logo">Ataraxia</a>
-                <!-- <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                        <li class="nav__item"><a href="#services" class="nav__link">Quality</a></li>
-                        <li class="nav__item"><a href="#products" class="nav__link">Product</a></li>
-                        <li class="nav__item"><a href="#size" class="nav__link">Size Chart</a></li>
-                        <li class="nav__item"><a href="#contact" class="nav__link">Contact us</a></li>
-
-                        <li><i class='bx bx-toggle-left change-theme' id="theme-button"></i></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <a href="admin.php" class="nav__user" id="nav-user"><i class='bx bxs-user'></i></a>
-                </div> -->
 
             </nav>
         </header>
@@ -194,7 +169,6 @@ if (isset($_GET['code'])) {
                 <div class="login__container bd-grid">
                     <div class="user">
                         <h2 class="title-login section-subtitle">Sign Up</h2>
-                        <!-- <p class="detail__description" style="text-align: center;">Silahkan login dengan akun google anda</p> -->
                         <div class="breadcrumb-pagination">
                         </div>
                         <div class="inputbox">
@@ -211,15 +185,14 @@ if (isset($_GET['code'])) {
                         <div class="button-login">
                             <a href="" class="button" style="width: 100%; text-align: center; margin: 15px 0 0">Login</a>
                             <div class="breadcrumb-pagination" style="margin: 10px 0"></div>
-                            <a href='<?= $client->createAuthUrl() ?>' class="button" style="width: 100%; text-align:center; background-color: #fff; color: #000; border: 1px solid grey"><img width="20px"
+                            <a href='<?= $client->createAuthUrl() ?>' class="button" style="width: 100%; text-align:center; background-color: #fff; color: #000; border: 1px solid grey">
+                                <img width="20px"
                                 style="margin-bottom:-4px; margin-right:8px"
                                 alt="Google sign-in"
                                 src="assets/img/asset/g.png" />
-                            Sign in With Google</a>
+                                Sign in With Google
+                            </a>
                         </div>
-
-                      
-
                     </div>
                 </div>
             </section>
