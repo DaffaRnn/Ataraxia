@@ -100,7 +100,6 @@ if (isset($_GET['code'])) {
                 document.location.href = '/admin.php';
             </script>
         ";
-        // header('location: admin.php');
     }else{
         echo "
             <script>
