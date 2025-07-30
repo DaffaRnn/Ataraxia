@@ -97,14 +97,14 @@ if (isset($_GET['code'])) {
         echo "
             <script>
                 alert('Login Berhasil!');
-                document.location.href = '/admin.php';
+                document.location.href = '../admin.php';
             </script>
         ";
     }else{
         echo "
             <script>
                 alert('Login Gagal!');
-                document.location.href = '/index.php';
+                document.location.href = '../index.php';
             </script>
         ";
     }
