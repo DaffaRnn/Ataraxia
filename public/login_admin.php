@@ -8,11 +8,29 @@ if (isset($_SESSION['logged_in'])){
     header('location: admin.php');
 }
 
-$conn = mysqli_connect("localhost", "root", "", "datatoko");
-// var_dump($conn);
+// Ambil DATABASE_URL dari environment
+$DATABASE_URL = getenv("DATABASE_URL") ?: getenv("MYSQL_URL");
 
-//panggil library
-require_once __DIR__ . '/vendor/autoload.php';
+if (!$DATABASE_URL) {
+    die("DATABASE_URL tidak ditemukan!");
+}
+
+// Parse URL
+$dbUrl = parse_url($DATABASE_URL);
+
+$host = $dbUrl['host'];
+$user = $dbUrl['user'];
+$pass = $dbUrl['pass'];
+$db   = ltrim($dbUrl['path'], '/');
+$port = $dbUrl['port'] ?? 3306; // default ke 3306 jika tidak disediakan
+
+// Buat koneksi
+$conn = new mysqli($host, $user, $pass, $db, $port);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
